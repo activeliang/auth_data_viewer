@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Auth Data Viewer",
+  "description": "网页Auth数据包括cookie、session、localStorage的导入导出",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "cookies",
+    "storage",
+    "<all_urls>",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

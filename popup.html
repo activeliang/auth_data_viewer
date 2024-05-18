@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+
+<head>
+  <style>
+    input,
+    textarea {
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+    }
+  </style>
+</head>
+<html>
+
+<head>
+  <title>Auth Data</title>
+</head>
+
+<body style="min-width: 600px; min-height: 300px; padding: .1rem;">
+  <div style="width: 100%;">
+    <button id="exportAuth">导出Auth</button>
+    <button id="copyData">拷贝</button>
+    <!-- <button id="uploadData">上传</button> -->
+    <button id="importAuth">导入Auth</button>
+    <textarea style="width: 100%; margin-top: .2rem;" id="authDataContainer" rows="18"></textarea>
+    <script src="popup.js"></script>
+  </div>
+</body>
+
+</html>
