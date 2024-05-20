@@ -1,4 +1,10 @@
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+const getStorageSync = key => new Promise((resolve, reject) => {
+  chrome.storage.local.get([key], function(result) {
+    return resolve(result[key])
+  });
+})
+
+chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
   console.info('request.type: ', request)
   if (request.type === "uploadAuthData") {
     const authData = {
@@ -6,7 +12,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       localStorage: { ...localStorage }
     };
     console.info('authData: ', authData)
-    chrome.runtime.sendMessage({ type: "uploadAuthData", data: authData }, function (response) { });
+    const cacheScope = await getStorageSync('authDataUploadScope')
+    const scope = prompt("请确认身份识别ID:", cacheScope)
+    chrome.runtime.sendMessage({ type: "uploadAuthData", data: authData, scope }, function (response) {}); 
   } else if (request.type === 'fetchCookiesResponse') {
     if (request.rawType === "exportAuthData") {
       const authData = {
