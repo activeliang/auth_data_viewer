@@ -14,6 +14,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
     console.info('authData: ', authData)
     const cacheScope = await getStorageSync('authDataUploadScope')
     const scope = prompt("请确认身份识别ID:", cacheScope)
+    if (!scope || /^\s*$/.test(scope)) return
     chrome.runtime.sendMessage({ type: "uploadAuthData", data: authData, scope }, function (response) {}); 
   } else if (request.type === 'fetchCookiesResponse') {
     if (request.rawType === "exportAuthData") {
